@@ -1,0 +1,38 @@
+* docker-query-playback
+** docker buildkit install
+  #+BEGIN_SRC
+$ more /tmp/install-docker-buildkit.sh
+#!/bin/bash
+#
+# https://docs.docker.com/build/buildkit/
+# https://github.com/docker/buildx/releases/
+# https://github.com/docker/buildx
+
+## For Ubuntu 24.04 try: sudo apt install docker-buildx
+## Or run the commands below.
+
+#VERSION=v0.14.1
+VERSION=$(curl -Ls -o /dev/null -w %{url_effective} https://github.com/docker/buildx/releases/latest)
+VERSION=${VERSION##*/}
+
+mkdir -p $HOME/.docker/cli-plugins
+wget https://github.com/docker/buildx/releases/download/$VERSION/buildx-$VERSION.linux-amd64 -O $HOME/.docker/cli-plugins/docker-buildx
+chmod +x $HOME/.docker/cli-plugins/docker-buildx
+
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
+
+echo 'export DOCKER_BUILDKIT=1' >> $HOME/.profile
+echo 'export COMPOSE_DOCKER_CLI_BUILD=1' >> $HOME/.profile
+$ chmod 755 /tmp/install-docker-buildkit.sh
+$ /tmp/install-docker-buildkit.sh
+$ docker-buildx version 
+github.com/docker/buildx v0.17.1 257815a6fbaee88976808020bf04274388275ae8
+  #+END_SRC
+
+** Docker file build
+   #+BEGIN_SRC
+$ DOCKER_BUILDKIT=1 docker build . -t query-playback 
+$ $ docker images | grep query-playback
+query-playback           latest    c998806e8192   3 minutes ago       213MB
+   #+END_SRC
