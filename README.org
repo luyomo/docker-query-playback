@@ -36,3 +36,13 @@ $ DOCKER_BUILDKIT=1 docker build . -t query-playback
 $ $ docker images | grep query-playback
 query-playback           latest    c998806e8192   3 minutes ago       213MB
    #+END_SRC
+* RUN
+** docker hub
+Please download the image from [[https://hub.docker.com/repository/docker/emaxchou/query-playback/general][query-playback from dockerhub]] and run it from docker.
+    #+BEGIN_SRC
+$ docker pull query-playback:v0.0.2
+    #+END_SRC
+** Run slowquery
+   #+BEGIN_SRC
+$  docker run --name playback query-playback:v0.0.2 --mysql-host=localhost --mysql-username=root --mysql-port=4000 --query-log-file arg 
+   #+END_SRC

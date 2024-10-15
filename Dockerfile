@@ -12,3 +12,8 @@ FROM centos:centos7
 
 RUN --mount=type=bind,from=compiler,source=/query-playback/build_dir/,target=/query-playback/build_dir cp /query-playback/build_dir/percona-playback /
 
+COPY ./config/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
+
+RUN yum update -y && yum -y install boost tbb mariadb.x86_64 && yum clean -y all
+
+ENTRYPOINT ["/percona-playback"]
