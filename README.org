@@ -40,9 +40,12 @@ query-playback           latest    c998806e8192   3 minutes ago       213MB
 ** docker hub
 Please download the image from [[https://hub.docker.com/repository/docker/emaxchou/query-playback/general][query-playback from dockerhub]] and run it from docker.
     #+BEGIN_SRC
-$ docker pull query-playback:v0.0.2
+$ docker pull emaxchou/query-playback:v0.0.2
+$ docker images 
+REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
+emaxchou/query-playback   v0.0.2    9c7194ea12d9   10 minutes ago   505MB
     #+END_SRC
 ** Run slowquery
    #+BEGIN_SRC
-$  docker run --name playback query-playback:v0.0.2 --mysql-host=localhost --mysql-username=root --mysql-port=4000 --query-log-file arg 
+$ docker run --name playback emaxchou/query-playback:v0.0.2 --mysql-host=localhost --mysql-username=root --mysql-port=4000 --query-log-file arg 
    #+END_SRC
